@@ -1,0 +1,31 @@
+<div>
+  <h2>Lista de Campeões</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Campeão</th>
+        <th>Função</th>
+        <th>Posição</th>
+        <th>Tipo</th>
+        <th>Editar</th>
+        <th>Remover</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for champ in champs %}
+        <tr>
+          <td>{{ champ.campeão }}</td>
+          <td>{{ champ.função }}</td>
+          <td>{{ champ.posição }}</td>
+          <td>{{ champ.tipo }}</td>
+          <td>  <a href="/champs/edit/{{champ.id}}">Editar</a> </td>
+          <td> <a href="/champs/delete/{{champ.id}}">Remover</a> </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">Não há campeões cadastrados.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,32 @@
+<div>
+  <h2>Lista de Tarefas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Titulo</th>
+        <th>Descrição</th>
+        <th>Data de Entrega</th>
+        <th>Feito</th>
+        <th>Editar</th>
+        <th>Remover</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.due_date }}</td>
+          <td>{{ task.done }}</td>
+          <td>  <a href="/tasks/edit/{{task.id}}">Editar</a> </td>
+          <td> <a href="/tasks/delete/{{task.id}}">Remover</a> </td>
+        </tr>
+        
+      {% empty %}
+        <tr>
+          <td colspan="4">Não há tarefas cadastrados.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

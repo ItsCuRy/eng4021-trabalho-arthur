@@ -1,0 +1,23 @@
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label>Campeão </label><br>
+    <input name="champ" type="text" value="{{ champ.campeão}}">
+  </div>
+  
+  <div>
+    <label>Função:</label><br>
+    <textarea name="function"> 
+     {{ champ.função}}
+    </textarea>
+  </div>
+  <div>
+    <label>Posição:</label><br>
+    <input name="posicao" type="text" value="{{ champ.posição}}">
+  </div>
+   <div>
+    <label>Tipo:</label><br>
+    <input name="tipo" type="text" value="{{ champ.tipo}}">
+  </div>
+  <input type="submit">
+</form>

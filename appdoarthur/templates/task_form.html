@@ -1,0 +1,24 @@
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label>Titulo </label><br>
+    <input name="title" type="text" value="{{ task.title}}">
+  </div>
+  
+  <div>
+    <label>Descrição:</label><br>
+    <textarea name="description">
+      {{ task.description}}
+    </textarea>
+  </div>
+  <div>
+    <label>Data de entrega:</label><br>
+    <input name="due-date" type="date" value="{{ task.due_date }}">
+  </div>
+  <div>
+    <input name="done" type="checkbox" {% if task.done == True %} checked{% endif %}>
+    <label>Feito:</label>
+  </div>
+  
+  <input type="submit">
+</form>

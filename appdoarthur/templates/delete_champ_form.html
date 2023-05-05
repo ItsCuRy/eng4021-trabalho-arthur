@@ -1,0 +1,6 @@
+<form method="POST">
+  {% csrf_token %}
+  Voce tem certeza que deseja remover o campeão de id = {{champ.id}}?
+  <input type="submit" name="confirm" value="Sim">
+  <input type="submit" value="Nao">
+</form>
