@@ -1,23 +1,23 @@
-from django.shortcuts import render, redirect
-from .models import Task, Champ
+from django.shortcuts import render, redirect #Importa os módulos render e redirect do pacote django.shortcuts
+from .models import Task, Champ #Importa os modelos Task e Champ do arquivo .models 
 
-def home(request):
+def home(request): #Renderiza o html da página principal e atribui os valores existentes no banco de dados para as Tasks e Champs registrados
   champs = Champ.objects.all()
   tasks = Task.objects.all()
   context = {'champs': champs,"tasks":tasks}
   return render(request, 'home.html', context)
   
-def list_tasks(request):
+def list_tasks(request): #Retorna uma lista de todas as tarefas cadastradas no banco de dados
   tasks = Task.objects.all()
   context = {"tasks":tasks}
   return render(request,"list_tasks.html", context=context)
   
-def list_champs(request):
+def list_champs(request): #Retorna uma lista de todos os campeões cadastrados no banco de dados
   champ = Champ.objects.all()
   context = {"champs":champ}
   return render(request,"list_champs.html", context=context)
 
-def create_task(request):
+def create_task(request): #Cria uma nova instância do modelo Task
   if request.method == "POST":
     if "done" not in request.POST:
       done=False
@@ -32,7 +32,7 @@ def create_task(request):
     return redirect("list_tasks")
   return render(request,"task_form.html")
 
-def create_champ(request):
+def create_champ(request): #Cria uma nova instância do modelo Champ
   if request.method == "POST":
     Champ.objects.create(
       campeão=request.POST["champ"],
@@ -43,7 +43,7 @@ def create_champ(request):
     return redirect("list_champs")
   return render(request,"champs_form.html")
 
-def update_task(request,task_id):
+def update_task(request,task_id): #Altera e atualiza uma intância já existente do modelo Task
   task = Task.objects.get(id = task_id)
   task.due_date = task.due_date.strftime("%Y-%m-%d")
   if request.method == "POST":
@@ -60,7 +60,7 @@ def update_task(request,task_id):
   print(type (task.due_date))
   return render(request,"task_form.html",context=context)
 
-def delete_task(request,task_id):
+def delete_task(request,task_id): #Apaga uma instância já existente do modelo Task
   task = Task.objects.get(id=task_id)
   if request.method == "POST":
     if "confirm" in request.POST:
@@ -69,7 +69,7 @@ def delete_task(request,task_id):
   context={"task":task}
   return render(request,"delete_form.html",context=context)
 
-def update_champ(request,champ_id):
+def update_champ(request,champ_id): #Altera e atualiza uma intância já existente do modelo Champ
   champ = Champ.objects.get(id=champ_id)
   if request.method == "POST":
     champ.campeão=request.POST["champ"]
@@ -81,7 +81,7 @@ def update_champ(request,champ_id):
   context={"champ":champ}
   return render(request,"champs_form.html",context=context)
 
-def delete_champ(request,champ_id):
+def delete_champ(request,champ_id): #Apaga uma instância já existente do modelo Champ
   champ = Champ.objects.get(id=champ_id)
   if request.method == "POST":
     if "confirm" in request.POST:
